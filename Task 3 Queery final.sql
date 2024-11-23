@@ -1,0 +1,29 @@
+--select * from employees where department = 'IT' and salary > 50000 ;
+--select * from  orders o join customers c on o.customer_id = c.customerid ;
+--select sum (quantitysold) from sales;
+--select upper(productname) from products;
+--select * from events where eventdate between current_date and current_date + interval '30 days'
+--select * from employees where salary > (select avg (salary)from employees);
+--create view active_customer as select c.customerid,c.customername,c.contactnumber from customers c
+--join orders o on c.customerid = o.customer_id where o.orderdate >= current_date - interval '1 year'
+--select participantid,participantname,score ,rank () over (order by score) from participants;
+--select *, sum (quantitysold) over (partition by product_id order by saledate)as running_total from sales;
+--update products  set price = price 1.10 where category = 'Electronics';
+--delete from customers where city = 'Delhi';
+-- select employeeID, salary, department, sum (salary) over (partition by department order by employeeid) as cumulativesalary
+-- from employees
+-- order by
+-- department,employeeid;
+-- create or replace function update_last_modified ()
+-- returns trigger as $$
+-- begin
+-- update products set last_modified=now() where productid=old.productid;
+-- return new;
+-- end;
+-- $$ language plpgsql;
+
+-- create trigger last_modified
+-- after update on products
+-- for each row
+-- execute function update_last_modified ()
+--select avg (quantity_sold), extract (month from registration_date) from customers group by (month from registration_date);
